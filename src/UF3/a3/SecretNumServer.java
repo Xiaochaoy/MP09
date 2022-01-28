@@ -6,6 +6,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 public class SecretNumServer {
     DatagramSocket socket;
@@ -39,13 +41,14 @@ public class SecretNumServer {
 
     //El server retorna al client el mateix missatge que li arriba però en majúscules
     private byte[] processData(byte[] data, int lenght) {
-        String msg = new String(data,0,lenght);
-        sn.secreto = sn.comprova(msg);
-        if (sn.secreto.equals("Correcte")){
+        int nombre = ByteBuffer.wrap(data).getInt();
+        System.out.println(nombre);
+        int numero = sn.comprova(nombre);
+        if (numero == 0){
             sn.pensa(100);
         }
-        System.out.println(msg);
-        return sn.secreto.getBytes();
+        byte[] resposta = ByteBuffer.allocate(4).putInt(numero).array();
+        return resposta;
     }
 
     public static void main(String[] args) {
