@@ -36,7 +36,7 @@ public class ThreadSevidorObjLLista implements Runnable{
         try {
             while (!acabat) {
                 //LLegim l'objecte LLista del stream input
-                Llista llista = (Llista) input.readObject();
+                Jugador llista = (Jugador) input.readObject();
 
                 //lectura i print de l'objecte List que es pot passar com a Object --> List és un objecte serialitzat
                 List<Integer> llistaList = (List<Integer>) input.readObject();
@@ -68,14 +68,14 @@ public class ThreadSevidorObjLLista implements Runnable{
 
     }
 
-    private Llista ordenarInetejar(Llista ll) {
+    private Jugador ordenarInetejar(Jugador ll) {
         Collections.sort(ll.getNumberList());
         Set<Integer> unics = new HashSet<>(ll.getNumberList());
         ll.setNumberList(unics.stream().collect(Collectors.toList()));
         return ll;
     }
 
-    private void printLlista(Llista llista) {
+    private void printLlista(Jugador llista) {
         llista.getNumberList().forEach(System.out::println);
     }
 }

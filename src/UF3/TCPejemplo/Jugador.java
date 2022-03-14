@@ -6,12 +6,12 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class Llista implements Serializable {
+public class Jugador implements Serializable {
     private static final long serialVersionUID = 2L;
     private String nom;
     private List<Integer> numberList;
 
-    public Llista(String nom, List<Integer> numberList) {
+    public Jugador(String nom, List<Integer> numberList) {
         this.nom = nom;
         this.numberList = numberList;
     }

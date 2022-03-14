@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,14 +32,12 @@ public class TCPClientObjLlista extends Thread {
             input = new ObjectInputStream(is);
 
             while (!acabat) {
-                Llista llista = new Llista("llista1", Arrays.asList(10,2,45,2,67,10));
-                List<Integer> llistaList = Arrays.asList(1,2,3,4,5,6,7,8);
-                output.writeObject(llista);
-                output.writeObject(llistaList);
+                Jugador jugador = new Jugador("joel", 100);
+                output.writeObject(jugador);
                 output.flush();
 
-                llista = (Llista) input.readObject();
-                printLlista(llista);
+                jugador = (Jugador) input.readObject();
+                printLlista(jugador);
                 acabat = true;
             }
         }catch (UnknownHostException e) {
@@ -62,8 +59,8 @@ public class TCPClientObjLlista extends Thread {
 
 
     }
-    private void printLlista(Llista llista) {
-        llista.getNumberList().forEach(System.out::println);
+    private void printLlista(Jugador jugador) {
+        System.out.println(jugador.apodo + " " + jugador.puntuacion);
     }
 
     public static void main(String[] args) {
