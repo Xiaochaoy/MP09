@@ -32,12 +32,14 @@ public class TCPClientObjLlista extends Thread {
             input = new ObjectInputStream(is);
 
             while (!acabat) {
-                Jugador jugador = new Jugador("joel", 100);
-                output.writeObject(jugador);
+                Llista llista = new Llista("llista1", Arrays.asList(10,2,45,2,67,10));
+                List<Integer> llistaList = Arrays.asList(1,2,3,4,5,6,7,8);
+                output.writeObject(llista);
+                output.writeObject(llistaList);
                 output.flush();
 
-                jugador = (Jugador) input.readObject();
-                printLlista(jugador);
+                llista = (Llista) input.readObject();
+                printLlista(llista);
                 acabat = true;
             }
         }catch (UnknownHostException e) {
@@ -59,8 +61,8 @@ public class TCPClientObjLlista extends Thread {
 
 
     }
-    private void printLlista(Jugador jugador) {
-        System.out.println(jugador.apodo + " " + jugador.puntuacion);
+    private void printLlista(Llista llista) {
+        llista.getNumberList().forEach(System.out::println);
     }
 
     public static void main(String[] args) {
